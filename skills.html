@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>技能与项目 | 我的成长主页</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site">
+    <div class="wrap">
+      <nav aria-label="主导航">
+        <ul>
+          <li><a href=" ">关于我</a ></li>
+          <li><a href="learning.html">学习记录</a ></li>
+          <li><a href="skills.html" aria-current="page">技能与项目</a ></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h1>技能与项目</h1>
+    <p class="lede">每项技能都附上一个作品或代码片段作为证据。</p >
+
+    <h2>技能</h2>
+
+    <div class="card">
+      <h3>C 语言</h3>
+      <p>用位运算解析 IP 地址，能把一个 32 位整数拆成四段并输出为点分十进制。</p >
+      <p><span class="placeholder">替换为你自己的代码片段，或放上 GitHub 仓库链接。</span></p >
+      <pre><code>/* 示例：提取 IP 地址的第一段（请替换为你自己的代码） */
+unsigned int ip = 0xC0A80101;
+unsigned int first = (ip >> 24) &amp; 0xFF;  /* 结果为 192 */</code></pre>
+    </div>
+
+    <div class="card">
+      <h3>Python</h3>
+      <p>正在学习基础语法，并在 GitHub 上维护练习仓库。</p >
+      <p><span class="placeholder">替换为你的 GitHub 仓库链接，例如 github.com/你的用户名/仓库名</span></p >
+    </div>
+
+    <h2>项目作品</h2>
+
+    <div class="card">
+      <h3><span class="placeholder">项目名称</span></h3>
+      <dl>
+        <dt><strong>解决什么问题</strong></dt>
+        <dd><span class="placeholder">用一两句话说明这个项目要解决的问题。</span></dd>
+        <dt><strong>我负责什么</strong></dt>
+        <dd><span class="placeholder">写清楚你具体做了哪部分，例如：独立完成 IP 解析模块。</span></dd>
+        <dt><strong>用了什么技术</strong></dt>
+        <dd><span class="placeholder">例如：C 语言、位运算、命令行输入输出。</span></dd>
+        <dt><strong>最大困难</strong></dt>
+        <dd><span class="placeholder">写下你遇到的最难的问题，以及你怎么处理的。</span></dd>
+      </dl>
+    </div>
+
+    <h2>联系方式</h2>
+    <p>邮箱：<span class="placeholder">your.name@example.com</span></p >
+    <p>GitHub：<a href="https://github.com/your-username"><span class="placeholder">github.com/your-username</span></a ></p >
+
+    <h2>给我留言</h2>
+    <form id="contact-form" novalidate>
+      <label>
+        姓名
+        <input type="text" id="name" name="name" autocomplete="name" required>
+      </label>
+      <p class="error" id="name-error" role="alert"></p >
+
+      <label>
+        邮箱
+        <input type="email" id="email" name="email" autocomplete="email" required>
+      </label>
+      <p class="error" id="email-error" role="alert"></p >
+
+      <label>
+        留言内容
+        <textarea id="message" name="message" required></textarea>
+      </label>
+      <p class="error" id="message-error" role="alert"></p >
+
+      <button type="submit">发送留言</button>
+      <p class="status" id="status" role="status"></p >
+    </form>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">最后更新：<span class="placeholder">2026-11-05</span></div>
+  </footer>
+
+  <script>
+    const form = document.getElementById("contact-form");
+    const status = document.getElementById("status");
+
+    function check(id, errorId, message, isValid) {
+      const field = document.getElementById(id);
+      const error = document.getElementById(errorId);
+      const ok = isValid(field.value.trim());
+      error.textContent = ok ? "" : message;
+      field.setAttribute("aria-invalid", ok ? "false" : "true");
+      return ok;
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      status.textContent = "";
+
+      const results = [
+        check("name", "name-error", "请填写姓名。", (v) => v.length > 0),
+        check("email", "email-error", "请填写正确的邮箱地址。", (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)),
+        check("message", "message-error", "留言内容不能为空。", (v) => v.length > 0)
+      ];
+
+      if (results.every(Boolean)) {
+        status.textContent = "表单检查通过。（本页面没有后端，留言不会真正发送。）";
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>
